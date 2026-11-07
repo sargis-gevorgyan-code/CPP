@@ -1,0 +1,32 @@
+int hourglassSum(Vector<Vector<int>> arr) {
+
+    int maxSum = 0;
+    for (int x = 0; x < 3; x++) {
+        for (int y = 0; y < 3; y++) {
+            maxSum += arr[x][y];
+        }
+    }
+    maxSum -= arr[1][0];
+    maxSum -= arr[1][2];
+
+    int sum = maxSum;
+    
+    for (int i = 0; i < arr.size() - 2; i++) {
+        for (int j = 0; j < arr[i].size() - 2; j++) {
+            sum = 0;
+            for (int x = 0; x < 3; x++) {
+                for (int y = 0; y < 3; y++) {
+                    sum += arr[i + x][j + y];
+                }
+            }
+            sum -= arr[i + 1][j];
+            sum -= arr[i + 1][j + 2];
+            if (sum >= maxSum) {
+                maxSum = sum;
+            }
+        }
+    }
+
+    return maxSum;
+
+}
